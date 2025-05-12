@@ -182,3 +182,84 @@ def game_dict():
             ]
         }
     }
+
+#helper function 
+def get_all_players():
+    data = game_dict()
+    return data["home"]["players"] + data["away"]["players"]
+
+#Delivarables functions
+
+def num_points_per_game(player_name):
+    for player in get_all_players():
+        if player["name"] == player_name:
+            return player["points_per_game"] 
+        
+print(num_points_per_game("Darius Garland"))
+
+        
+        
+def players_age(player_name):
+    for player in get_all_players():
+        if player["name"] == player_name:
+            return player["age"]
+        
+print(players_age("Darius Garland"))
+
+
+def team_colors(team_name ):
+    data = game_dict()
+    for location in data:
+        team = data[location]
+        if team["team_name"] == team_name:
+            return team["colors"]
+print(team_colors("Cleveland Cavaliers"))
+#print(team_colors("Washington Wizards"))
+
+
+def team_names():
+
+    data = game_dict()
+    return [data["home"]["team_name"], data["away"]["team_name"]]
+print(team_names())
+
+
+def player_numbers(team_name):
+    data = game_dict()
+    for team in data.values():
+      if team["team_name"] == team_name:
+          return [player["number"] for player in team["players"]]
+print(player_numbers("Cleveland Cavaliers"))
+
+
+def player_stats(player_name):
+    for player in get_all_players():
+        if player["name"] == player_name:
+            return player
+print(player_stats("Darius Garland"))
+
+
+def average_rebounds_by_shoe_brands():
+    brand_rebounds = {}
+
+    for player in get_all_players():
+        brand = player["shoe_brand"]
+        rebounds = player["rebounds_per_game"]
+        if brand not in brand_rebounds:
+            brand_rebounds[brand] = []
+            brand_rebounds[brand].append(rebounds)
+    for brand, rebounds in brand_rebounds.items():
+        avg = sum(rebounds) / len(rebounds)
+        print(f'"{brand}": {avg:.2f}')
+
+
+
+                           
+                           
+
+    
+
+
+
+
+        
